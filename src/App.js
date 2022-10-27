@@ -1,22 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
+import react, { useState } from 'react';
 
 function App() {
+  //STATES
+  const [points, setPoints] = useState(0);
+
+  //ACTIONS:
+  const addPointsHandler = () => {
+    setPoints(points + 1);
+  };
+  console.log(points);
+  console.log();
+
+  //VIEWS:
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img
+          onClick={addPointsHandler}
+          src={logo}
+          className="App-logo"
+          alt="logo"
+        />
+        <h1>Points: {points}</h1>
       </header>
     </div>
   );
