@@ -3,7 +3,7 @@ import './App.css';
 import react, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAddPoint, setSubstractPoint } from './features/gameSlice';
-
+import ChildOne from './components/ChildOne';
 function App() {
   //customs hooks:
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function App() {
   // const [points, setPoints] = useState(0);
 
   //redux state-useSelector
-  const points = useSelector((state) => state.game?.point);
+  const addPoints = useSelector((state) => state.game?.point);
 
   //ACTIONS:
   const addPointsHandler = () => {
@@ -31,8 +31,9 @@ function App() {
           className="App-logo"
           alt="logo"
         />
-        <h1>Add Points: {points}</h1>
-        <h1>Hello</h1>
+        <h1>Add Points: {addPoints}</h1>
+        <ChildOne addPoints={addPoints} />
+        <h1>substract Point:</h1>
       </header>
     </div>
   );
