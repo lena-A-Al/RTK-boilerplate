@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+//this will get the deafult export only
 import gameReducer from './gameSlice';
 export const store = configureStore({
   reducer: {

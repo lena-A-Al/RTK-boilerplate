@@ -1,19 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  points: 0,
+  point: 0,
 };
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    addPoint: (state) => {
-      state.points += 1;
+    setAddPoint: (state) => {
+      state.point += 1;
+    },
+    setSubstractPoint: (state) => {
+      state.point -= 1;
     },
   },
 });
 
-export const { addPoint } = gameSlice.actions;
+export const { setAddPoint, setSubstractPoint } = gameSlice.actions;
 // we can export our slice here and connect it to our store.
 export default gameSlice.reducer;
