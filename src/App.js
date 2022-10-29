@@ -1,39 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
-import react, { useState } from 'react';
+import React, { useEffect } from 'react';
+import Game from './components/Game';
+import { updateName } from './features/playerSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAddPoint, setSubstractPoint } from './features/gameSlice';
-import ChildOne from './components/ChildOne';
+
 function App() {
   //customs hooks:
   const dispatch = useDispatch();
-  //STATES
-  // const [points, setPoints] = useState(0);
+  //selector
+  const playerName = useSelector((state) => state.player.username);
 
-  //redux state-useSelector
-  const addPoints = useSelector((state) => state.game?.point);
+  useEffect(() => {
+    //grab out username from localStorage
+    const username = localStorage.getItem('clicker_username');
+    dispatch(updateName(username));
+  });
 
-  //ACTIONS:
-  const addPointsHandler = () => {
-    //loca state
-    // setPoints(points + 1);
-    //redux state
-    dispatch(setAddPoint());
+  //handlers:
+  const handlerNameChange = (event) => {
+    console.log(updateName(event.target.value));
+    dispatch(updateName(event.target.value));
+    //using localStorage to store our data without using databases whenever we write name.
+    localStorage.setItem('clicker_username', event.target.value);
   };
 
   //VIEWS:
   return (
     <div className="App">
       <header className="App-header">
-        <img
-          onClick={addPointsHandler}
-          src={logo}
-          className="App-logo"
-          alt="logo"
-        />
-        <h1>Add Points: {addPoints}</h1>
-        <ChildOne addPoints={addPoints} />
-        <h1>substract Point:</h1>
+        <h1>Player Name: {playerName}</h1>
+        {/* this is going to be a user input data */}
+        <input
+          // name={playerName}
+          type="text"
+          value={playerName}
+          onChange={handlerNameChange}
+        ></input>
+        <Game />
       </header>
     </div>
   );
